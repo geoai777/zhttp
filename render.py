@@ -1,5 +1,4 @@
 from re import sub
-from datetime import datetime
 
 class RenderGames:
     """
@@ -40,7 +39,6 @@ class RenderGames:
             self,
             html_path: str,
             css_path: str,
-            body: str,
             title: str="",
         ) -> str:
         """
@@ -50,11 +48,7 @@ class RenderGames:
         if len(title) > 0:
             html = sub('@@title@@', title, html)
         css = self.read_resource(css_path)
-        html = sub('@@style@@', css, html)
-        del css
-        html = sub('@@time@@', str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")), html)
-        return sub('@@body@@', body, html)
-
+        return sub('@@style@@', css, html)
 
 
 def main():

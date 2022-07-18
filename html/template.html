@@ -24,32 +24,111 @@
 </form>
 </div>
 <h1>@@title@@</h1>
-@@body@@
-<div>Server time: <span>@@time@@</span></div>
-<div class="right">Local time: <span id="localtime"></span></div>
+<div id="core_data"></div>
+<div>Server time: <span id="server_time"></span></div>
+<div class="right">Local time: <span id="local_time"></span></div>
 </div></div>
 
 <div class="footer_frame"><div class="footer">p0rc0_r0ss0 2022</div></div>
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
+  /*
+  * Executes when page is fully loaded.
+  */
   let selector = document.getElementById("interval");
   updateInterval(selector);
+  
+  refreshAll();
 
-  let localTime = document.getElementById("localtime");
-        localTime.innerHTML = new Date().toLocaleString('en-US', { hour12: false });
 }, false);
 
+function refreshData(){
+  getJSON(window.location.href + 'data', 'json', function(err, data) {
+    if (err !== null) {
+        alert('error');
+    } else {
+        let data_div = document.getElementById("core_data");
+        let ready_html = '';
+
+        for (let i = 0; i < data.length; i++){
+            ready_html += '<div class="data_block">';
+        
+            for (let j = 0; j < data[i].length; j++){
+                ready_html += '<div class="data_line">';
+            
+                for (let k = 0; k < data[i][j].length; k++){
+                    ready_html += '<div class="data_cell">';
+                    ready_html += data[i][j][k];
+                    ready_html += '</div>\n';
+                  }
+                ready_html += '</div>\n';
+              }
+            ready_html += '</div>\n';
+          }
+        data_div.innerHTML = ready_html;
+    }
+  });
+}
+
+function refreshTime(){
+  getJSON(window.location.href + 'time', 'text', function(err, data) {
+    if (err !== null) {
+        alert('error');
+    } else {
+        let time_div = document.getElementById("server_time");
+        time_div.innerHTML = data;
+    }
+  });
+}
+
+function refreshAll(){
+  /*
+  * Refresh data and time from server.
+  * Update local time value.
+  */
+  let localTime = document.getElementById("local_time");
+  localTime.innerHTML = new Date().toLocaleString('en-US', { hour12: false });
+
+  refreshData();
+
+  refreshTime();
+}
+
+function getJSON(url, type, callback) {
+  /*
+  * Gets data from specified URL and feed data to callback function.
+  */
+  let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = type;
+    xhr.onload = function() {
+      let status = xhr.status;
+      if (status === 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status, xhr.response);
+      }
+    };
+  xhr.send();
+}
+
 function updateInterval(e) {
-  var options = e.options
-  var seconds = options[options.selectedIndex].value
+  /*
+  * Updates page given dropbox value.
+  */
+  let options = e.options
+  let seconds = options[options.selectedIndex].value
 
   if (this.currentInterval)
     clearInterval(this.currentInterval)
 
   if (!isNaN(seconds))
     this.currentInterval = setInterval(
-      function() { location.reload() },
+      function() { 
+          /* location.reload() - old way, reloads page completely */ 
+          refreshAll(); 
+        },
       seconds * 1000
     )
 }

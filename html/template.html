@@ -11,6 +11,7 @@
 <body>
 <div class="main_frame"><div class="inner_frame">
 <div class="refresh_selector right">
+<div class="button" onclick="refreshAll();">Refresh</div>
 <form stype="text-align:right"> 
   Update interval (in seconds): 
   <select name="interval" id="interval" onchange="updateInterval(this);">
@@ -20,7 +21,7 @@
     <option value="10">10</option> 
     <option value="15">15</option> 
     <option value="20">20</option> 
-  </select> 
+  </select>
 </form>
 </div>
 <h1>@@title@@</h1>

@@ -10,6 +10,33 @@ body {
     text-align: right;
 }
 
+#interval {
+    height: 1.5rem;
+    border-radius: 2px;
+    border: 1px solid black;
+    width: 7rem;
+    cursor: pointer;
+}
+
+.button {
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #0052a9;
+    margin: 0 0.5rem;
+    padding: 0 0.3rem;
+    width: 4rem;
+    height: 1.4rem;
+    text-align: center;
+    cursor: pointer;
+    float: right;
+    border-radius: 2px;
+}
+
+.button:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
 .main_frame {
     width: 100%;   
     display: flex;

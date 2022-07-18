@@ -1,0 +1,60 @@
+html {
+    font-family: "Segoe Ui", Arial;
+}
+
+body {
+    margin: 0;
+}
+
+.right {
+    text-align: right;
+}
+
+.main_frame {
+    width: 100%;   
+    display: flex;
+    justify-content: center;
+    background-color: #474747;
+    height: 100vh;
+}
+
+.inner_frame {
+    width: 75%;
+    background-color: #fdfdfd;
+    padding: 2rem;
+}
+
+.refresh_selector {
+    text-align: right;
+}
+
+.data_block {
+    display: flex;
+    flex-direction: column;
+}
+
+.data_line {
+    display: flex;
+    flex-direction: row;
+    margin: 0.25rem 0;
+}
+
+.data_line:nth-of-type(2n) {
+    background-color: #f0f0f0;
+}
+
+.data_cell {
+    flex: 1 1 0px;
+}
+
+.footer_frame {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.footer {
+    font-size: 0.75rem;
+}

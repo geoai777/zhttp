@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="author" content="p0rc0_r0ss0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1" />
+
+<title>@@title@@</title>
+
+<style>@@style@@</style>
+<body>
+<div class="main_frame"><div class="inner_frame">
+<div class="refresh_selector right">
+<form stype="text-align:right"> 
+  Update interval (in seconds): 
+  <select name="interval" id="interval" onchange="updateInterval(this);">
+    <option value="disabled">Disabled</option>
+    <option value="2">2</option> 
+    <option value="5">5</option> 
+    <option value="10">10</option> 
+    <option value="15">15</option> 
+    <option value="20">20</option> 
+  </select> 
+</form>
+</div>
+<h1>@@title@@</h1>
+@@body@@
+<div>Server time: <span>@@time@@</span></div>
+<div class="right">Local time: <span id="localtime"></span></div>
+</div></div>
+
+<div class="footer_frame"><div class="footer">p0rc0_r0ss0 2022</div></div>
+<script>
+
+document.addEventListener('DOMContentLoaded', function() {
+  let selector = document.getElementById("interval");
+  updateInterval(selector);
+
+  let localTime = document.getElementById("localtime");
+        localTime.innerHTML = new Date().toLocaleString('en-US', { hour12: false });
+}, false);
+
+function updateInterval(e) {
+  var options = e.options
+  var seconds = options[options.selectedIndex].value
+
+  if (this.currentInterval)
+    clearInterval(this.currentInterval)
+
+  if (!isNaN(seconds))
+    this.currentInterval = setInterval(
+      function() { location.reload() },
+      seconds * 1000
+    )
+}
+</script>
+</body>
+

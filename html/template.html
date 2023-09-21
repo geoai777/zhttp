@@ -52,8 +52,36 @@ function refreshData(){
         let data_div = document.getElementById("core_data");
         let ready_html = '';
 
+	console.log(data);
+
         for (let i = 0; i < data.length; i++){
             ready_html += '<div class="data_block">';
+	    title = data[i][0][0].toLowerCase();
+	    if (title.indexOf('gpu') !== -1){
+		ready_html += '<div class="data_line">';
+		ready_html += '<div class="data_cell bold">GPU freq</div>';
+		ready_html += '<div class="data_cell">min</div>';
+	    	ready_html += '<div class="data_cell">cur</div>';
+		ready_html += '<div class="data_cell">max</div>';
+		ready_html += '</div>';
+	    }
+	    if (title.indexOf('cpu') !== -1){
+		ready_html += '<div class="data_line">';
+		ready_html += '<div class="data_cell bold">CPU freq</div>';
+		ready_html += '<div class="data_cell">min</div>';
+	    	ready_html += '<div class="data_cell">cur</div>';
+		ready_html += '<div class="data_cell">max</div>';
+		ready_html += '</div>';
+	    }
+	    if (title.indexOf('thermal') !== -1){
+		ready_html += '<div class="data_line">';
+		ready_html += '<div class="data_cell bold">Temperature stats</div>';
+		ready_html += '<div class="data_cell">ºC</div>';
+		ready_html += '</div>';
+	    }
+
+	    console.log(title);
+
         
             for (let j = 0; j < data[i].length; j++){
                 ready_html += '<div class="data_line">';
@@ -66,7 +94,8 @@ function refreshData(){
                 ready_html += '</div>\n';
               }
             ready_html += '</div>\n';
-          }
+	    delete title;
+        }
         data_div.innerHTML = ready_html;
     }
   });

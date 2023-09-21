@@ -118,9 +118,10 @@ class SensorData:
         return thermal
 
 
-import logging
 
 def main():
+    import logging
+
     logging.basicConfig(
             level=logging.DEBUG,
             format="[%(filename)s:%(lineno)s - %(funcName)10s() ] %(message)s"

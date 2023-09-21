@@ -16,7 +16,7 @@ version: '3.5'
 
 services:
   zhttp:
-    image: zhttp
+    image: p0rc0r0ss0/zhttp
     container_name: zhttp
     restart: unless-stopped
     environment:
@@ -27,7 +27,7 @@ services:
 ```
 and then
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 # Usage

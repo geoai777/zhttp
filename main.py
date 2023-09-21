@@ -7,6 +7,8 @@ from render import RenderGames
 from json import dumps
 from datetime import datetime
 
+from config import host, port, debug
+
 import logging
 
 class H(BaseHTTPRequestHandler):
@@ -48,12 +50,15 @@ class H(BaseHTTPRequestHandler):
 
 
 def main():
+    if debug:
+        log_level = logging.DEBUG
+    else:
+        log_level = logging.INFO
+
     logging.basicConfig(
-            level=logging.DEBUG,
+            level=log_level,
             format="[%(filename)s:%(lineno)s - %(funcName)10s() ] %(message)s"
     )
-    host = '192.168.10.250'
-    port = 8080
 
     try:
         httpd = HTTPServer((host, port), H)
